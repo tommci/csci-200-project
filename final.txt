@@ -1,0 +1,83 @@
+TITLE:
+    Thomas McInnes
+    CSCI 200 Section D
+    Tech Dumpster Dive
+
+PROBLEM DESCRIPTION:
+    My project is a virtual case opening simulator, where users randomly receive items of varying
+    rarity by “dumpster diving.” This concept is inspired off of the case opening system used in Counter
+    Strike: Global Offensive, of course without using actual weapons as the items. Instead, the item pool will
+    be tech items of varying quality, from dollar store earbuds to the Valve Index (a 1,000 dollar
+    VR headset by Valve). The simulation will also have a simulated currency, called
+    DumpsterBux. Each “dumpster” contains one item and costs a set price to “dive”. Each possible item has
+    a unique price, and not every item is necessarily more valuable than the cost to open each case; the
+    more rare the item is, the more valuable it is! The simulation tracks the amount of spent
+    DumpsterBux and the total profit/debt accrued over a dumpster dive session. The simulation also
+    tracks all of the items received, displaying their rarity and value along with the count that the user has.
+    Lastly, the project has save and load functionality, allowing users with impressive inventories to
+    save their hard earned loot and restore it at a later time.
+
+PROGRAM DOCUMENTATION:
+    When the program is run, the user is prompted to load a save file. If the user has played before, they should have
+    a file in the directory named "dumpster_save.txt", which will load their data from before. If this file
+    is not present, the load will fail and the program will close. After the user makes their choice,
+    they are presented with the main menu, where they may choose from several buttons: dumpster, inventory,
+    save, and quit. If the user chooses dumpster, they will automatically begin a dumpster dive, in which an animation
+    plays and a random item is chosen from 4 possible items: a Valve Index, a JBL Flip 6, a Sony DVD Player, and
+    dollar store earbuds. After the item is recieved, their inventory and funds will update, and the user can return
+    to the main menu, where they can once more view their inventory, their stats (profit/debt, money spent/earned) and
+    save or quit. If the user saves, the user's current data (profit, money spent, money earned, total number of each
+    item) is saved to a file 'dumpster_save.txt'. If the user plays again and chooses to load, their data will be read
+    from this file into the project. If the user chooses to view their inventory, they will see all possible items and
+    their counts, as well as each item's stats (its value and rarity). If the user chooses to quit, they will be prompted
+    to confirm their selection before closing the program.
+
+    To extend the program, a programmer may add buttons, text, or number values to their respective lists, as well as updating
+    the screen values to compensate. These classes/functions should be set up in a way to allow new types to be created.
+
+    The largest thing that changed from my proposal was the class implementation. This was largely due to the fact that, at the time,
+    we had not learned much about how classes worked and how they're written in to a program. Therefore my UML diagrams were a bit
+    vague and ended up not being very helpful for the project, and I also underestimated what I would need to encapsulate in a class
+    and what I wouldn't need to.
+
+CLASS DESCRIPTION:
+    I used 2 custom classes and several structs in this program. The classes are NumberDisplay and Button. The NumberDisplay
+    class encapsulates the position, description, and value of a numerical value that is to be displayed on the SFML window.
+    The class functionality includes putting this descriptor and value together into one string and displaying it on the screen
+    in order for the user to see the number. It is also capable of updating its value, meaning the NumberDisplay object can 
+    be dynamically updated throughout the program so that it does not display a constant value: it can change. This class helped
+    greatly in simplifying the process of displaying a dynamic number on the screen, as there are many variables in the program
+    that must be displayed to the user: the counts of each item, profit/debt, and money spent and earned. The other custom class used
+    was Button. Button holds data for the text on the button itself, the command the button should perform, the button's width and height,
+    and the button's position on the screen. The button is able to draw itself on the screen based on its data members, and it is
+    also able to detect if it has been clicked with its checkIfClicked method. This class helped create buttons that were used
+    frequently throughout the project in a simple manner, and may be used to create further buttons beyond the scope of this project.
+    These two classes are definitely ones that I can see myself applying to other projects in the future and expanding upon.
+
+LIST DATA STRUCTURE:
+    The list data structure I chose to use for this project was vectors. This was because vectors are the most simple for me to
+    understand and work with, as we've used them most extensively throughout the semester compared to linked lists and arrays. They're
+    also more reliable than the other styles of lists in my opinion, as the library for vector was written by professionals, while
+    the classes for linked lists and arrays were written by me, who is not quite a professional yet. The vectors were used to hold
+    each different button, text box, and number value throughout the program. Then, within the draw loop, the vectors were iterated
+    through based on the screen's button/text/number count and start index to create the UI of the program.
+
+FILE I/O:
+    File I/O was incorporated into the sprites of the items to roll as well as the save/load data functionality. It was necessary
+    because the data would not be able to be stored/loaded outside of the program otherwise, and the user would not be able to physically
+    see the items they recieved without it. Without saving and loading, all progress a user could have made, including rare items recieved,
+    would be lost the moment the program terminates, which is no fun.
+
+REFLECTIONS:
+    From this project, I learned a lot about how to work with SFML and the draw loop to create animations, buttons, and general UI
+    interfaces. This was a necessary part of my code in order for it to work properly and look decent, and so figuring out how to
+    display things on the screen and have a screen that can change dynamically was crucial. I think my solution of using a 
+    Screen struct was clever, but could definitely be improved upon if I had more time. I also should definitely have made the
+    text_box function into a class of its own. However, due to time constraints and the knowledge I had when I wrote text_box, 
+    I left it as a function. It served its purpose for this program and can still be used by other programmers to create other
+    text boxes, but it would function far better if it was a class like Button and NumberDisplay ended up being. 
+
+    The only other trouble I ran into was turning the Inventory object into a class. I struggled with working with this for a while,
+    and eventually decided to simplify it and make it a struct that simply holds counts of items. I'm not even sure if making 
+    Inventory a class would be much better based on how this program is structured, but it was something I struggled with figuring out
+    for a while before settling for a simpler approach.
